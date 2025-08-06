@@ -26,11 +26,11 @@ export default function AuthCallback() {
             .eq('user_id', session.user.id)
             .single();
 
-          if (profile) {
+          if (profile && profile.username) {
             // Profile exists, go to home
             router.replace('/(tabs)');
           } else {
-            // No profile, go to setup
+            // Profile exists but username is null, go to setup
             router.replace('/(onboarding)/setup-profile');
           }
         } else {

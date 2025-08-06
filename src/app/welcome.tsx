@@ -13,7 +13,7 @@ export default function WelcomeScreen() {
       if (!session) {
         // Not authenticated, go to sign in
         router.replace('/(onboarding)/signin');
-      } else if (!profile) {
+      } else if (!profile || !profile.username) {
         // Authenticated but no profile, go to setup
         router.replace('/(onboarding)/setup-profile');
       } else {

@@ -5,7 +5,7 @@ export interface Database {
         Row: {
           id: string;
           user_id: string;
-          username: string;
+          username: string | null;
           full_name: string;
           avatar_url: string | null;
           created_at: string;
@@ -14,7 +14,7 @@ export interface Database {
         Insert: {
           id?: string;
           user_id: string;
-          username: string;
+          username?: string | null;
           full_name: string;
           avatar_url?: string | null;
           created_at?: string;
@@ -23,7 +23,7 @@ export interface Database {
         Update: {
           id?: string;
           user_id?: string;
-          username?: string;
+          username?: string | null;
           full_name?: string;
           avatar_url?: string | null;
           created_at?: string;

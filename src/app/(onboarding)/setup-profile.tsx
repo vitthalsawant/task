@@ -136,12 +136,12 @@ export default function SetupProfileScreen() {
 
       const { error } = await supabase
         .from('profiles')
-        .insert({
-          user_id: user.id,
+        .update({
           username: username.toLowerCase(),
           full_name: fullName.trim(),
           avatar_url: avatarUrl,
-        });
+        })
+        .eq('user_id', user.id);
 
       if (error) {
         throw error;

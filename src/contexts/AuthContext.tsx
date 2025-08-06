@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { Session, User } from '@supabase/supabase-js';
+import { Platform } from 'react-native';
+import * as Linking from 'expo-linking';
 import { supabase } from '../lib/supabase';
 import { Database } from '../types/database';
 
@@ -75,10 +77,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signInWithGoogle = async () => {
     try {
+      const redirectUrl = Platform.OS === 'web' 
+        ? `${window.location.origin}/(auth)/callback`
+        : Linking.createURL('/(auth)/callback');
+
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: 'swaraj-v2:///(auth)/callback',
+          redirectTo: redirectUrl,
         },
       });
       if (error) throw error;
