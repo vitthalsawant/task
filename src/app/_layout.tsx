@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import "../../global.css";
 import { Slot, SplashScreen, Stack } from "expo-router";
 import { useFonts } from "expo-font";
+import { AuthProvider } from "../contexts/AuthContext";
 
 export default function RootLayout() {
     const [fontsLoaded] = useFonts({
@@ -23,5 +24,14 @@ export default function RootLayout() {
         return null;
       }
 
-  return <Slot />;
+  return (
+    <AuthProvider>
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="(tabs)" />
+        <Stack.Screen name="(auth)" />
+        <Stack.Screen name="(onboarding)" />
+        <Stack.Screen name="welcome" />
+      </Stack>
+    </AuthProvider>
+  );
 }
